@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense, useEffect } from 'react';
+import { Provider, useDispatch } from 'react-redux';
+import { store } from './redux';
+import Routing from './routes';
+import Loader from './components/loader/loader';
+import './App.css'
+import { clearLocalStorage, getDataFromLocalStorage } from './utils/localStorage';
+import { decodeToken, isTokenActivated } from './utils/functions';
+import { setLogOutUser, setLoggedUser } from './redux/actions';
 
-function App() {
+const App = () => {
+
+  const token = getDataFromLocalStorage('token')
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const isTokenActive = isTokenActivated(token)
+    const decodedToken = decodeToken(token)
+    if (!isTokenActive) {
+      clearLocalStorage()
+      dispatch(setLogOutUser({}))
+    } else {
+      dispatch(setLoggedUser({ token, user: decodedToken, isLogged: isTokenActive }))
+    }
+  }, [dispatch, token])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<Loader/>} >
+      <Provider store={store} >
+          <Routing />
+      </Provider>
+    </Suspense>
   );
 }
 
