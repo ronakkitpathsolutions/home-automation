@@ -48,13 +48,15 @@ const TopBar =() => {
     <AppBar sx={{height:"65px"}} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <HomeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <HomeIcon onClick={() => navigate('/dashboard')} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, cursor: 'pointer' }} />
           <Typography
             variant="h5"
+            onClick={() => navigate('/dashboard')}
             noWrap
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
+              cursor: 'pointer',
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 600,
@@ -101,12 +103,14 @@ const TopBar =() => {
               ))}
             </Menu>
           </Box>
-          <HomeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <HomeIcon onClick={() => navigate('/dashboard')} sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, cursor: 'pointer' }} />
           <Typography
             variant="h5"
+            onClick={() => navigate('/dashboard')}
             noWrap
             sx={{
               mr: 2,
+              cursor: 'pointer',
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',

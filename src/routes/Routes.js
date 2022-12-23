@@ -55,3 +55,4 @@ export const Routes = [
 
 export const authRoutes = () => Routes.filter((value) => value?.isAuth)
 export const adminRoutes = () => Routes.filter((value) => value?.isAdmin)
+
