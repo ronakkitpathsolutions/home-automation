@@ -3,7 +3,7 @@ import { getDataFromLocalStorage } from '../utils/localStorage';
 import { handleLogout } from '../utils/functions';
 
 const instance = axios.create({
-    baseURL: `${process.env.REACT_APP_API_SERVER_URL}`
+    baseURL: "https://product-back-end.vercel.app/api"
 })
 
 instance.interceptors.request.use(
