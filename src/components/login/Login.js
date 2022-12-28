@@ -39,7 +39,7 @@ const Login = () => {
                 console.log('data :', data)
                 storeDataFromLocalStorage('token', data?.token)
                 dispatch(setLoggedUser({ token: data?.token, isLogged: isTokenActivated(data?.token), user: decodeToken(data?.token) }))
-                navigate('/dashboard')
+                navigate('/dashboard')  
             }
         } catch (error) {
             console.log('error', error)
